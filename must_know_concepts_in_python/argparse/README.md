@@ -5,6 +5,9 @@ Python's `argparse` module makes it easy to write user-friendly command-line int
 This folder holds files related to `argparse` tutorial. Files that helped me learn so wanted to share it with anyone starting out.
 The argparse tutorial documentation for python can be found here: [ArgparseTutorial] (https://docs.python.org/3/howto/argparse.html)
 
+More on Argparse argument methods check out:
+
+http://zetcode.com/python/argparse/#:~:text=Python%20argparse%20metavar,in%20error%20and%20help%20outputs.&text=The%20example%20names%20the%20expected,The%20default%20name%20is%20V%20.&text=The%20given%20name%20is%20shown%20in%20the%20help%20output.
 
 Installation
 ------------
