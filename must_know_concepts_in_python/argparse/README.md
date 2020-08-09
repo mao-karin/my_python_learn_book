@@ -22,12 +22,32 @@ The `argparse` module provides a mechanism to define the arguments a program req
 
 Let's start with a the format:
 
+Postional argument format:
+
     import argparse
     parser = argparse.ArgumentParser()                                        #create the parser
     parser.add_argument('input', type=int, help='input here' )                #add argument(s)
     args= parser.parse_args()                                                 #execute the parse_args() method
 
     print(args.input)                                                         #use the parser argument in your code 
+
+Run like this on the command line:
+python my_python_script.py input_value
+
+Optional argument format:
+
+    import argparse
+    parser = argparse.ArgumentParser()                                        #create the parser
+    parser.add_argument('-input_flag_short_cut, '--input_flag', type=int, help='input here' )                #add argument(s)
+    args= parser.parse_args()                                                 #execute the parse_args() method
+
+    print(args.input)                                                         #use the parser argument in your code 
+
+Run like this on the command line:
+
+python my_python_script.py --input_flag input_value
+or
+python my_python_script.py -input_flag_short_cut input_value
 
 
 Positional arguments
