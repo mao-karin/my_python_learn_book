@@ -1,74 +1,74 @@
-# Python Argparse Tutorial
-
-Python's `argparse` module makes it easy to write user-friendly command-line interfaces. It is the recommended command-line parsing module in the Python standard library.
-
-This folder holds files related to `argparse` tutorial. Files that helped me learn so wanted to share it with anyone starting out.
-The argparse tutorial documentation for python can be found here: [ArgparseTutorial] (https://docs.python.org/3/howto/argparse.html)
+# if__name__=='__main__' tutorial
 
 
-Installation
-------------
-`argparse` is part of Python's standard library, meaning you don't need to install anything apart from a basic Python environment!
+Background on __main__
+-----------------------
+Watch this video to understand: https://www.youtube.com/watch?v=pzNISmtmzcY
+
+__main__ is the starting point of execution. First module's name. It changes with the script.
 
 
-Basics
-------
-Command-line arguments are passed to Python programs via `sys.argv`:
+Concept of if __name__=="__main__"
+----------------------------------
+`__main__` is the name of the scope in which top-level code executes. A module’s __name__ is set equal to '__main__' when read from standard input, a script, or from an interactive prompt.
 
-    import sys
-    print(sys.argv)
+A module can discover whether or not it is running in the main scope by checking its own __name__, which allows a common idiom for conditionally executing code in a module when it is run as a script or with python -m but not when it is imported:
 
-The `argparse` module provides a mechanism to define the arguments a program requires and takes care of parsing those out of sys.argv.  
+    if__name__=="__main__":
+        #executes only if run as a script 
+        main()
 
-Let's start with a the format:
-
-    import argparse
-    parser = argparse.ArgumentParser()                                        #create the parser
-    parser.add_argument('input', type=int, help='input here' )                #add argument(s)
-    args= parser.parse_args()                                                 #execute the parse_args() method
-
-    print(args.input)                                                         #use the parser argument in your code 
+For a package, the same effect can be achieved by including a __main__.py module, the contents of which will be executed when the module is run with -m.
 
 
-Positional arguments
---------------------
-The first type of arguments `argparse` can parse are positional arguments.
-They derive their name from the fact that a program should know what to do
-with the arguments based solely on where it appears on the command line.
-
-An example:
-
-    import argparse
-    parser = argparse.ArgumentParser(description='Create a new FITS file '
-                                                 'containing one extension '
-                                                 'from an existing FITS file.')
-    parser.add_argument('filename',
-                        help='path to a FITS file')
-    parser.add_argument('extension', type=int,
-                        help='the FITS extension number')
-    args = parser.parse_args()
-    print(args.filename)
-
-
-Optional arguments
+Why do we need it?
 ------------------
-Optional arguments allow the user to change behaviour of a program using optional flags or parameters.
+myfunc.py
 
-An example:
+    def add (a,b):
+        return (a + b)
+    
+    print add(2,3)
 
-    import argparse
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-v', '--verbose', help='increase verbosity')
-    args = parser.parse_args()
-    if args.verbosity:
-        print('verbose turned on')
+test.py
+
+    from myfunc import add
+    
+    print add(2,2)
+
+So, if you run myfunc.py it will output 5.
+If you run test.py it will output 5 then 4.
+
+so this is where you want to use __name__ == “main”.
+
+myfunc.py
+
+    def add (a,b):
+        return (a + b)
+    
+    if__name__=="__main__":
+        print add(2,3)
+
+test.py
+
+    from myfunc import add
+    
+    print add(2,2)
+
+So, if you run test.py, output is 4.
+
+The __main__ is no longer executed because the __name__ is no longer "__main__". Now the __name__ = myfunc. You can check this by print __name__.
 
 
-Advanced contents of the tutorial
----------------------------------
-- Adding [mutually exclusive arguments](example-scripts/fitsextract3.py#L19)
+Notes:
+
+- if __name__ == “main”: is used to execute some code only if the file was run directly, and not imported. if imported and called in another script, if __name__=="__main__" will - not execute.
+
+- You can test whether your script is being run directly or being imported by something else by testing __name__ variable.
+
+- If script is getting imported by some other module at that time __name__ will be module name.
 
 
-Futher reading
---------------
-* [A comparison of different command-line parsing libraries](https://realpython.com/blog/python/comparing-python-command-line-parsing-libraries-argparse-docopt-click/)
+Some useful links:
+
+https://www.youtube.com/watch?v=JtKOP-ThcbU
