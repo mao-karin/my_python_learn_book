@@ -1,1 +1,0 @@
-This is a brief tutorial for beginners on how to use argparse for commandline arguments 
